@@ -6,13 +6,14 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-  
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -87,9 +88,9 @@
   users.users.luis = {
     isNormalUser = true;
     description = "luis";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -103,25 +104,33 @@
 
   # Install firefox.
   programs.firefox.enable = true;
- 
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless =
+    {
+      enable = true;
+      setSocketVariable = true;
+    };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-  nixpkgs-fmt
-	grim
-	slurp
-	wl-clipboard
-	mako
-	spotify
-	vesktop
-	vscode
-	git
-	google-chrome
-  kitty
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
+      nixpkgs-fmt
+      grim
+      slurp
+      wl-clipboard
+      mako
+      spotify
+      vesktop
+      vscode
+      git
+      google-chrome
+      kitty
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -132,8 +141,8 @@
   # };
 
   programs.sway = {
-	enable = true;
-	wrapperFeatures.gtk = true;
+    enable = true;
+    wrapperFeatures.gtk = true;
   };
   # List services that you want to enable:
 
