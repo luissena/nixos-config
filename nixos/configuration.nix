@@ -6,7 +6,16 @@
       ./hardware-configuration.nix
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "root" "luis" ];
+    substituters = [ "https://cachix.cachix.org" "https://cache.nixos.org" "http://nix-cache.irancho.com.br" ];
+    trusted-substituters = [ "https://cachix.cachix.org" "https://cache.nixos.org" "http://nix-cache.irancho.com.br" ];
+    trusted-public-keys = [ "nix-cache.irancho.com.br:HvCdS6lKTt7MTMnBLfcGAVqmroQiEV1j36tbNr0YM98=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM=" ];
+
+    max-jobs = "auto";
+    auto-optimise-store = true;
+  };
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -91,6 +100,7 @@
 
   environment.systemPackages = with pkgs;
     [
+      devenv
       logseq
       nixpkgs-fmt
       grim
