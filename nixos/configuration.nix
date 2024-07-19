@@ -9,10 +9,14 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; 
+  networking.hostName = "nixos";
 
   networking.networkmanager.enable = true;
 
@@ -65,7 +69,7 @@
     description = "luis";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-      
+
     ];
   };
 
@@ -87,6 +91,7 @@
 
   environment.systemPackages = with pkgs;
     [
+      logseq
       nixpkgs-fmt
       grim
       slurp
@@ -104,7 +109,7 @@
     enable = true;
     wrapperFeatures.gtk = true;
   };
- 
+
   services.gnome.gnome-keyring.enable = true;
 
   system.stateVersion = "24.05";
