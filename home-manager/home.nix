@@ -23,6 +23,26 @@
     userEmail = "luis.senarode@gmail.com";
   };
 
+  programs.starship = {
+    enable = true;
+  };
+
+  programs.fish = {
+    enable = true;
+
+    interactiveShellInit = ''
+        starship init fish | source
+      '';
+  };
+
+  programs.kitty = {
+     enable = true;
+
+      settings = {
+        copy_on_select = true;
+      };
+  };
+
   systemd.user.startServices = "sd-switch";
 
   home.stateVersion = "23.05";
