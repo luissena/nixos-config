@@ -1,17 +1,18 @@
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "luis" ];
-    substituters = [ "https://cachix.cachix.org" "https://cache.nixos.org" "http://nix-cache.irancho.com.br" ];
-    trusted-substituters = [ "https://cachix.cachix.org" "https://cache.nixos.org" "http://nix-cache.irancho.com.br" ];
-    trusted-public-keys = [ "nix-cache.irancho.com.br:HvCdS6lKTt7MTMnBLfcGAVqmroQiEV1j36tbNr0YM98=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM=" ];
+    experimental-features = ["nix-command" "flakes"];
+    trusted-users = ["root" "luis"];
+    substituters = ["https://cachix.cachix.org" "https://cache.nixos.org" "http://nix-cache.irancho.com.br"];
+    trusted-substituters = ["https://cachix.cachix.org" "https://cache.nixos.org" "http://nix-cache.irancho.com.br"];
+    trusted-public-keys = ["nix-cache.irancho.com.br:HvCdS6lKTt7MTMnBLfcGAVqmroQiEV1j36tbNr0YM98=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="];
 
     max-jobs = "auto";
     auto-optimise-store = true;
@@ -59,7 +60,6 @@
 
   services.printing.enable = true;
 
-
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -67,18 +67,13 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
-
-
   };
-
 
   users.users.luis = {
     isNormalUser = true;
     description = "luis";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker" "kvm" "adbusers"];
     packages = with pkgs; [
-
     ];
   };
 
@@ -91,29 +86,31 @@
   programs.firefox.enable = true;
 
   virtualisation.docker.enable = true;
-  virtualisation.docker.rootless =
-    {
-      enable = true;
-      setSocketVariable = true;
-    };
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
-
-  environment.systemPackages = with pkgs;
-    [
-      devenv
-      logseq
-      nixpkgs-fmt
-      grim
-      slurp
-      wl-clipboard
-      mako
-      spotify
-      vesktop
-      vscode
-      git
-      google-chrome
-      kitty
-    ];
+  environment.systemPackages = with pkgs; [
+    jetbrains.datagrip
+    alejandra
+    devenv
+    nixpkgs-fmt
+    grim
+    slurp
+    mako
+    spotify
+    vesktop
+    vscode
+    git
+    google-chrome
+    kitty
+    (pkgs.buildFHSUserEnv {
+      name = "zed";
+      targetPkgs = _: [pkgs.zed-editor];
+      runScript = "zed";
+    })
+  ];
 
   programs.sway = {
     enable = true;
