@@ -1,31 +1,99 @@
 {
-  description = "My first minimal nix config";
+  description = "Personal NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    flake-utils.url = "github:numtide/flake-utils";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+
+    stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+
+    apple-fonts.url = "github:luissena/apple-fonts.nix";
   };
 
-  outputs =
-    { nixpkgs
-    , home-manager
-    , ...
-    }@inputs: {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./nixos/configuration.nix
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-utils,
+    home-manager,
+    stylix,
+    apple-fonts,
+    ...
+  }: let
+    systems = with flake-utils.lib.system; [
+      aarch64-darwin
+      x86_64-darwin
+      x86_64-linux
+    ];
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+    systemsFlakes = flake-utils.lib.eachSystem systems (system: let
+      inherit (lib.extra) mapModulesRec';
 
-            home-manager.users.luis = import ./home-manager/home.nix;
-          }
-        ];
+      overlays = [
+        (import overlays/electron.nix)
+        (import overlays/postman.nix)
+      ];
+
+      lib = pkgs.lib.extend (self: super: {
+        extra = import ./lib {
+          inherit inputs;
+
+          pkgs = nixpkgs.legacyPackages.${system};
+          lib = self;
+        };
+      });
+
+      pkgs = import nixpkgs {
+        inherit system;
+
+        config.allowUnfree = true;
+        config.permittedInsecurePackages = ["electron-25.9.0"];
+
+        overlays =
+          overlays
+          ++ [
+            (final: prev: apple-fonts.packages.${system})
+          ];
       };
+
+      mkHost = path: let
+        inherit (builtins) baseNameOf;
+        inherit (lib) mkDefault removeSuffix;
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit pkgs lib inputs system;};
+          modules =
+            [
+              {
+                nixpkgs.pkgs = pkgs;
+                networking.hostName = mkDefault (removeSuffix ".nix" (baseNameOf path));
+              }
+
+              home-manager.nixosModule
+              stylix.nixosModules.stylix
+
+              (import path)
+            ]
+            ++ mapModulesRec' ./modules import;
+        };
+    in {
+      nixosConfigurations = {
+        red = mkHost ./hosts/red;
+      };
+    });
+
+    system = "x86_64-linux";
+  in
+    systemsFlakes
+    // {
+      nixosConfigurations = systemsFlakes.nixosConfigurations.${system};
     };
 }
