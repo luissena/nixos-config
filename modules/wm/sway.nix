@@ -380,6 +380,10 @@ in {
             "xkb_layout" = "us";
             "xkb_variant" = "alt-intl";
           };
+          "12625:16405:ROYUAN_Gaming_Keyboard" = {
+            "xkb_layout" = "us";
+            "xkb_variant" = "alt-intl";
+          };
 
           "type:touchpad" = {
             "tap" = "enabled";
