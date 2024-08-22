@@ -104,6 +104,7 @@
       shfmt
       cloudflare-warp
       zx
+      go
     ];
 
     home = {
