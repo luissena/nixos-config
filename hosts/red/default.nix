@@ -93,8 +93,6 @@
       (discord.override {withOpenASAR = true;})
       vesktop
       alejandra
-      anydesk
-      d2
       devenv
       gcloud
       gh
@@ -104,9 +102,7 @@
       nixd
       onlyoffice-bin
       shfmt
-      signal-desktop
       cloudflare-warp
-      ventoy-full
       zx
     ];
 
