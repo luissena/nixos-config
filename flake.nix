@@ -19,7 +19,6 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     flake-utils,
     home-manager,
