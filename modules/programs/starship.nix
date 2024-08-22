@@ -22,6 +22,10 @@ in {
         {
           format = "$all";
           palette = "catppuccin_mocha";
+          line_break = {
+            disabled = true;
+          };
+
         }
         // builtins.fromTOML (builtins.readFile (pkgs.fetchFromGitHub
           {

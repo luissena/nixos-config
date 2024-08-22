@@ -8,7 +8,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    mtr
     arion
     bat
     bintools
@@ -57,7 +56,7 @@
       fish.enable = true;
       git.enable = true;
       kitty.enable = true;
-
+      starship.enable = true;
       zed.enable = true;
     };
 
@@ -106,6 +105,7 @@
       onlyoffice-bin
       shfmt
       signal-desktop
+      cloudflare-warp
       ventoy-full
       zx
     ];
@@ -123,6 +123,9 @@
 
         vscode = {
           enable = true;
+          package = pkgs.vscode.fhs;
+          extensions = lib.mkForce [];
+          userSettings = lib.mkForce {};
         };
       };
     };

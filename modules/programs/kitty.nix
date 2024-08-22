@@ -21,6 +21,7 @@ in {
         copy_on_select = true;
         disable_ligatures = "cursor";
         enable_audio_bell = false;
+        font_size = 32;
       };
 
       shellIntegration.enableFishIntegration = fish.enable;
