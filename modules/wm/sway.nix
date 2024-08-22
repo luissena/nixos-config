@@ -349,8 +349,8 @@ in {
         ];
 
         gaps = {
-          inner = 10;
-          smartGaps = true;
+          inner = 25;
+          smartGaps = false;
         };
 
         window = {
