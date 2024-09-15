@@ -39,7 +39,6 @@
   # Services
   services = {
     gnome.gnome-keyring.enable = true;
-
     redis.servers."redis" = {
       enable = true;
       port = 6379;
@@ -91,17 +90,22 @@
       ]);
     in [
       (discord.override {withOpenASAR = true;})
+      bitwarden-desktop
+      brave
       vesktop
       alejandra
       devenv
       gcloud
       gh
       jetbrains.datagrip
+      jetbrains.rider
       nil
       webcord
       nixd
       onlyoffice-bin
+      postman
       shfmt
+      dotnet-sdk_8
       cloudflare-warp
       zx
       go
