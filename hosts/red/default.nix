@@ -56,7 +56,6 @@
       git.enable = true;
       kitty.enable = true;
       starship.enable = true;
-      zed.enable = true;
     };
 
     services = {
@@ -90,24 +89,20 @@
       ]);
     in [
       (discord.override {withOpenASAR = true;})
-      bitwarden-desktop
       brave
       vesktop
       alejandra
       devenv
       gcloud
-      gh
       jetbrains.datagrip
       jetbrains.rider
       nil
       webcord
       nixd
-      onlyoffice-bin
       postman
       shfmt
       dotnet-sdk_8
       cloudflare-warp
-      zx
       go
     ];
 
