@@ -36,6 +36,7 @@
           ./modules/audio.nix
           ./modules/bluetooth.nix
           ./modules/gui.nix
+          ./modules/locale.nix
         ];
       };
     };
