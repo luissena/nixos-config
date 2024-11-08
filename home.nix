@@ -18,15 +18,6 @@
       userEmail = "luis.senarode@gmail.com";
     };
 
-    fish = {
-      enable = true;
-    };
-
-    starship = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-
     gnome-shell = {
       enable = true;
 

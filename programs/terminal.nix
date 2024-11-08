@@ -3,6 +3,17 @@
   pkgs,
   ...
 }: {
+  home-manager.users.sena = {
+    fish = {
+      enable = true;
+    };
+
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+  };
+
   programs = {
     bash = {
       interactiveShellInit = ''
