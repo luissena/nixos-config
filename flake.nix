@@ -37,6 +37,7 @@
           ./modules/bluetooth.nix
           ./modules/gui.nix
           ./modules/locale.nix
+          ./modules/network.nix
         ];
       };
     };

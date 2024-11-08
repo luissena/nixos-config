@@ -52,14 +52,8 @@
 
     pkgs.beekeeper-studio
 
-    pkgs.cloudflare-warp
     pkgs.google-cloud-sdk
   ];
-
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
-  };
 
   programs = {
     bash = {
@@ -85,7 +79,7 @@
     users.sena = {
       isNormalUser = true;
       description = "sena";
-      extraGroups = ["networkmanager" "wheel" "docker"];
+      extraGroups = ["wheel" "docker"];
     };
   };
 
