@@ -33,6 +33,7 @@
               };
             };
           }
+          ./modules/audio.nix
         ];
       };
     };
