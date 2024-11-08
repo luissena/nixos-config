@@ -39,6 +39,7 @@
           ./modules/locale.nix
           ./modules/network.nix
           ./services/docker.nix
+          ./programs/terminal.nix
         ];
       };
     };
