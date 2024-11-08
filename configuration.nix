@@ -7,38 +7,6 @@
     ./hardware-configuration.nix
   ];
 
-  hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-
-      package = pkgs.bluez-experimental;
-
-      settings = {
-        General = {
-          MultiProfile = "multiple";
-          FastConnectable = "true";
-          Experimental = "true";
-          ResumeDelay = "4";
-        };
-      };
-    };
-
-    pulseaudio = {
-      extraModules = [pkgs.pulseaudio-modules-bt];
-
-      extraConfig = ''
-        load-module module-switch-on-connect
-
-        unload module-bluetooth-policy
-        load-module module-bluetooth-policy auto_switch=2
-
-        unload module-bluetooth-discover
-        load-module module-bluetooth-discover headset=native
-      '';
-    };
-  };
-
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -133,8 +101,6 @@
   };
 
   services = {
-    blueman.enable = true;
-
     printing.enable = true;
 
     xserver = {

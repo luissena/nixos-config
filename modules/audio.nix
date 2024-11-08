@@ -40,20 +40,6 @@
           };
         };
       };
-
-      wireplumber.extraConfig = {
-        "10-bluez" = {
-          "monitor.bluez.properties" = {
-            "bluez5.enable-hw-volume" = true;
-          };
-        };
-
-        "11-bluetooth-policy" = {
-          "wireplumber.settings" = {
-            "bluetooth.autoswitch-to-headset-profile" = false;
-          };
-        };
-      };
     };
   };
 

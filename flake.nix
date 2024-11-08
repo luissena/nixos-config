@@ -34,6 +34,7 @@
             };
           }
           ./modules/audio.nix
+          ./modules/bluetooth.nix
         ];
       };
     };
