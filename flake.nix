@@ -20,7 +20,7 @@
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./hosts
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
@@ -39,13 +39,9 @@
               };
             };
           }
-          ./modules/audio.nix
-          ./modules/bluetooth.nix
-          ./modules/gui.nix
-          ./modules/locale.nix
-          ./modules/network.nix
-          ./services/docker.nix
-          ./programs/terminal.nix
+          ./modules
+          ./services
+          ./programs
         ];
       };
     };
