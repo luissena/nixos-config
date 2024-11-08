@@ -4,13 +4,15 @@
   ...
 }: {
   home-manager.users.sena = {
-    fish = {
-      enable = true;
-    };
+    programs = {
+      fish = {
+        enable = true;
+      };
 
-    starship = {
-      enable = true;
-      enableFishIntegration = true;
+      starship = {
+        enable = true;
+        enableFishIntegration = true;
+      };
     };
   };
 
