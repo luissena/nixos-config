@@ -79,12 +79,8 @@
     users.sena = {
       isNormalUser = true;
       description = "sena";
-      extraGroups = ["wheel" "docker"];
+      extraGroups = ["wheel"];
     };
-  };
-
-  virtualisation = {
-    docker.enable = true;
   };
 
   systemd = {
