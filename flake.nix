@@ -29,7 +29,13 @@
               useUserPackages = true;
               backupFileExtension = "backup";
               users = {
-                sena = import ./home.nix;
+                sena = {
+                  home = {
+                    username = "sena";
+                    homeDirectory = "/home/sena";
+                    stateVersion = "24.05";
+                  };
+                };
               };
             };
           }

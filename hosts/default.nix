@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ./modules/hardware.nix
+    ../modules/hardware.nix
   ];
 
   boot = {
