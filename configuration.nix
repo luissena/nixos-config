@@ -73,10 +73,6 @@
     };
   };
 
-  services = {
-    printing.enable = true;
-  };
-
   security = {
     rtkit.enable = true;
   };
