@@ -37,9 +37,10 @@
 
   services = {
     blueman.enable = true;
-
     pipewire = {
       wireplumber.extraConfig = {
+        api.alsa.soft-mixer = true;
+
         "10-bluez" = {
           "monitor.bluez.properties" = {
             "bluez5.enable-hw-volume" = true;

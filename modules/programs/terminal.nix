@@ -9,6 +9,12 @@
         enable = true;
       };
 
+      direnv = {
+        enable = true;
+
+        nix-direnv.enable = true;
+      };
+
       starship = {
         enable = true;
         enableFishIntegration = true;

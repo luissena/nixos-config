@@ -3,17 +3,16 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ../modules/hardware.nix
-  ];
-
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
   };
-
+  programs.steam.enable = true;
+  hardware.graphics = {
+    enable = true;
+  };
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
@@ -31,13 +30,13 @@
       allowUnfree = true;
     };
   };
-
   environment.systemPackages = [
     pkgs.stremio
     pkgs.google-chrome
     pkgs.slack
     pkgs.vesktop
-
+    pkgs.obs-studio
+    pkgs.postman
     pkgs.rustc
     pkgs.cargo
     pkgs.gcc
@@ -49,7 +48,11 @@
     pkgs.vscode-fhs
     pkgs.alejandra
     pkgs.dotnet-sdk_8
-
+    pkgs.jetbrains.datagrip
+    pkgs.jetbrains.rider
+    pkgs.droidcam
+    pkgs.obs-studio-plugins.droidcam-obs
+    pkgs.google-cloud-sql-proxy
     pkgs.beekeeper-studio
 
     pkgs.google-cloud-sdk
@@ -68,6 +71,21 @@
       isNormalUser = true;
       description = "sena";
       extraGroups = ["wheel"];
+    };
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+    users = {
+      sena = {
+        home = {
+          username = "sena";
+          homeDirectory = "/home/sena";
+          stateVersion = "24.05";
+        };
+      };
     };
   };
 

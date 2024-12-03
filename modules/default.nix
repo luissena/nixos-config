@@ -4,10 +4,8 @@
   ...
 }: {
   imports = [
-    ./audio.nix
-    ./bluetooth.nix
-    ./gui.nix
-    ./locale.nix
-    ./network.nix
+    ./programs
+    ./services
+    ./system
   ];
 }

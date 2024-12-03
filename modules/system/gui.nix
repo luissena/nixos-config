@@ -20,6 +20,16 @@
 
     dconf = {
       settings = {
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
+        };
+
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          binding = "<Super>s";
+          command = "gnome-terminal";
+          name = "Open terminal";
+        };
+
         "org/gnome/shell" = {
           disable-user-extensions = false;
           enabled-extensions = [
@@ -35,7 +45,7 @@
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    image = ../assets/images/wallpaper.png;
+    image = ../../assets/images/wallpaper.png;
     polarity = "dark";
 
     opacity.terminal = 0.6;
@@ -44,7 +54,6 @@
   services = {
     xserver = {
       enable = true;
-
       displayManager = {
         gdm.enable = true;
 

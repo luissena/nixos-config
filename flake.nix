@@ -20,28 +20,11 @@
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              users = {
-                sena = {
-                  home = {
-                    username = "sena";
-                    homeDirectory = "/home/sena";
-                    stateVersion = "24.05";
-                  };
-                };
-              };
-            };
-          }
+
+          ./hosts
           ./modules
-          ./services
-          ./programs
         ];
       };
     };
