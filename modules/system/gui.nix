@@ -44,11 +44,11 @@
 
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    image = ../../assets/images/wallpaper.png;
-    polarity = "dark";
-
     opacity.terminal = 0.6;
+    image = ../../assets/images/wallpaper.png;
+    autoEnable = false;
+
+    opacity.applications = 0.5;
   };
 
   services = {

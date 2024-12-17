@@ -2,6 +2,7 @@
   description = "A simple NixOS flake";
 
   inputs = {
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     stylix.url = "github:danth/stylix";
     home-manager = {
@@ -14,6 +15,7 @@
     nixpkgs,
     home-manager,
     stylix,
+    zen-browser,
     ...
   }: {
     nixosConfigurations = {

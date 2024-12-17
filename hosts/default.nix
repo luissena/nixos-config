@@ -2,7 +2,10 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  zen-browser.url = "github:0xc000022070/zen-browser-flake";
+  system = "x86_64-linux";
+in {
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -31,6 +34,7 @@
     };
   };
   environment.systemPackages = [
+    pkgs.go
     pkgs.stremio
     pkgs.google-chrome
     pkgs.slack
@@ -56,6 +60,8 @@
     pkgs.beekeeper-studio
 
     pkgs.google-cloud-sdk
+
+    pkgs.alacritty
   ];
 
   security = {
